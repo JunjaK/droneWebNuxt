@@ -6,6 +6,18 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: 'Database',
+      meta: [
+        {
+          hid: 'database',
+          name: 'Descriptions',
+          content: 'db-Content',
+        },
+      ],
+    };
+  },
   components: {
 
   },

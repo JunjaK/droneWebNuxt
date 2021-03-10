@@ -9,6 +9,18 @@
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
+  head() {
+    return {
+      title: 'DroneWeb',
+      meta: [
+        {
+          hid: 'database',
+          name: 'Descriptions',
+          content: 'DroneWeb-Content',
+        },
+      ],
+    };
+  },
   data() {
     return {
       key: 123,

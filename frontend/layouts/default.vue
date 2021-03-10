@@ -6,7 +6,7 @@
           <a-menu
             theme="dark"
             mode="horizontal"
-            :default-selected-keys="['2']"
+            :default-selected-keys="['1']"
             :style="{ lineHeight: '40px', marginTop: '10px' }"
           >
             <a-menu-item key="null" disabled
@@ -45,7 +45,7 @@
       </a-layout-header>
       <a-layout-content :style="{ padding: '0 20px', marginTop: '84px' }">
         <div :style="{ background: '#fff', padding: '20px', height: '100%'}">
-          <Nuxt/>
+          <nuxt keep-alive :keep-alive-props="{max: 5}"/>
         </div>
       </a-layout-content>
       <a-layout-footer :style="{ textAlign: 'center' }">
@@ -54,6 +54,29 @@
     </a-layout>
   </a-config-provider>
 </template>
+
+<script>
+export default {
+  /* vue-meta -> 각 페이지의 meta */
+  head() {
+    return {
+      titleTemplate: 'Drone Web - %s',
+      meta: [
+        {
+          hid: 'defaultLayout',
+          name: 'Descriptions',
+          content: 'Content',
+        },
+      ],
+    };
+  },
+  data() {
+    return {
+      tabKey: 1,
+    };
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .logo-title {
