@@ -1,7 +1,7 @@
 <template>
   <div>
-    {{ getSettings }}
     <logo></logo>
+    <div class="test-class"></div>
   </div>
 </template>
 
@@ -32,17 +32,12 @@ export default {
     }),
   },
   created() {
-    console.log(this.getSettings);
   },
   fetch() {
     this.setSettings({ test: '123' });
-    console.log('thisisFetchLifeCycle');
-    console.log(this.getSettings);
   },
   mounted() {
     this.setSettings({ test: '456' });
-    console.log('mounted LifeCycle');
-    console.log(this.getSettings);
   },
   methods: {
     ...mapActions({
