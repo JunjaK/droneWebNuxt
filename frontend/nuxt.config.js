@@ -14,18 +14,27 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],
   },
+  loading: {
+    color: '#1890ff',
+    height: '5px',
+  },
+  layoutTransition: {
+    name: 'default-layout',
+    mode: 'out-in',
+  },
+  pageTransition: {
+    name: 'default-page',
+    mode: 'out-in',
+  },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '~/assets/styles/less/index',
+    '~/assets/styles/scss/index',
   ],
-  styleResources: {
-    scss: [
-      '@/assets/styles/scss/index',
-    ],
-  },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '@/plugins/ApiClient/index',
     '@/plugins/antd-ui',
   ],
 
@@ -48,11 +57,12 @@ export default {
   axios: {
     proxy: true,
     retry: { retries: 3 },
-    baseUrl: '',
+    baseUrl: 'http://localhost:5555',
   },
   proxy: {
-    '/api/': '',
-    '/api2/': '',
+    '/api/': {
+      target: 'http://localhost:5555',
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -68,6 +78,7 @@ export default {
   },
 
   router: {
+    middleware: 'stats',
     extendRoutes(routes, resolve) {
       routes.push({
         name: '404Page',
