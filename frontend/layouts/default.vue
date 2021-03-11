@@ -1,12 +1,12 @@
 <template>
   <a-config-provider>
-    <a-layout :style="{height: '100vh'}">
+    <a-layout :style="{height: '100%'}">
       <a-layout-header class="header-style">
         <a-row type="flex" justify="space-between">
           <a-menu
             theme="dark"
             mode="horizontal"
-            :default-selected-keys="['1']"
+            v-model="tabKey"
             :style="{ lineHeight: '40px', marginTop: '10px' }"
           >
             <a-menu-item key="null" disabled
@@ -19,19 +19,19 @@
                 <span class="logo-title">Drone Web</span>
               </div>
             </a-menu-item>
-            <a-menu-item key="1" class="router-menu-item">
+            <a-menu-item :key="1" class="router-menu-item">
               <nuxt-link to="/">
                 <a-icon type="environment"/>
                 RT-Map
               </nuxt-link>
             </a-menu-item>
-            <a-menu-item key="2" class="router-menu-item router-menu-margin">
+            <a-menu-item :key="2" class="router-menu-item router-menu-margin">
               <nuxt-link to="/database">
                 <a-icon type="database"/>
                 DataBase
               </nuxt-link>
             </a-menu-item>
-            <a-menu-item key="3" class="router-menu-item">
+            <a-menu-item :key="3" class="router-menu-item">
               <nuxt-link to="/analytics">
                 <a-icon type="dashboard"/>
                 Analytics
@@ -44,7 +44,7 @@
         </a-row>
       </a-layout-header>
       <a-layout-content :style="{ padding: '0 20px', marginTop: '84px' }">
-        <div :style="{ background: '#fff', padding: '20px', height: '100%'}">
+        <div :style="{ background: '#fff', padding: '20px',minHeight: 'calc(100vh - 84px - 69px)',  height: '100%'}">
           <nuxt keep-alive :keep-alive-props="{max: 5}"/>
         </div>
       </a-layout-content>
@@ -72,8 +72,25 @@ export default {
   },
   data() {
     return {
-      tabKey: 1,
+      tabKey: [1],
     };
+  },
+  created() {
+    const pageRoute = this.$route.fullPath.split('/')[1];
+    switch (pageRoute) {
+    case '':
+      this.tabKey = [1];
+      break;
+    case 'database':
+      this.tabKey = [2];
+      break;
+    case 'analytics':
+      this.tabKey = [3];
+      break;
+    default:
+      this.tabKey = [1];
+      break;
+    }
   },
 };
 </script>
