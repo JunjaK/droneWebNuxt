@@ -1,7 +1,13 @@
 <template>
   <div>
-    <logo></logo>
-    <div class="test-class"></div>
+    <div id="map-wrap" style="height: 90vh">
+      <client-only>
+        <l-map :zoom=18 :center="[37.5642135,127.0016985]">
+          <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
+          <l-marker :lat-lng="[37.413294,127.269311]"></l-marker>
+        </l-map>
+      </client-only>
+    </div>
   </div>
 </template>
 
