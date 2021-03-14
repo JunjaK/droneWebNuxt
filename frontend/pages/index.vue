@@ -1,14 +1,16 @@
 <template>
   <div>
-    <logo></logo>
+    <logo/>
     <div class="test-class"></div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import Logo from '@/components/logo';
 
 export default {
+  components: { Logo },
   head() {
     return {
       title: 'DroneWeb',

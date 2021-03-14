@@ -44,7 +44,7 @@
         </a-row>
       </a-layout-header>
       <a-layout-content :style="{ padding: '0 20px', marginTop: '84px' }">
-        <div :style="{ background: '#fff', padding: '20px',minHeight: 'calc(100vh - 84px - 69px)',  height: '100%'}">
+        <div :style="{ minHeight: 'calc(100vh - 84px - 69px)',  height: '100%'}">
           <nuxt keep-alive :keep-alive-props="{max: 5}"/>
         </div>
       </a-layout-content>
@@ -56,7 +56,10 @@
 </template>
 
 <script>
+import LayoutFooter from '@/components/Layout/footer';
+
 export default {
+  components: { LayoutFooter },
   /* vue-meta -> 각 페이지의 meta */
   head() {
     return {

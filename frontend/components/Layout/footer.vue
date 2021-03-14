@@ -6,9 +6,7 @@
 
 <script>
 export default {
-  components: {
-
-  },
+  name: 'LayoutFooter',
   data() {
     return {
 
