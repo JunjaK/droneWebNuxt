@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-main-without-header">
     <logo/>
     <div class="test-class"></div>
   </div>

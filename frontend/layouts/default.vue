@@ -44,11 +44,11 @@
         </a-row>
       </a-layout-header>
       <a-layout-content :style="{ padding: '0 20px', marginTop: '84px' }">
-        <div :style="{ minHeight: 'calc(100vh - 84px - 69px)',  height: '100%'}">
+        <div :style="{ minHeight: 'calc(100vh - 84px - 89px)',  height: '100%'}">
           <nuxt keep-alive :keep-alive-props="{max: 5}"/>
         </div>
       </a-layout-content>
-      <a-layout-footer :style="{ textAlign: 'center' }">
+      <a-layout-footer class="footer-style">
         <layout-footer/>
       </a-layout-footer>
     </a-layout>
@@ -91,7 +91,7 @@ export default {
       this.tabKey = [3];
       break;
     default:
-      this.tabKey = [1];
+      this.tabKey = [999];
       break;
     }
   },
@@ -99,6 +99,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~assets/styles/mixins.scss';
+
 .logo-title {
   color: white;
   font-size: 20px;
@@ -119,5 +121,12 @@ export default {
   margin-right: 20px;
   margin-top: 16px;
   line-height: 30px;
+}
+.footer-style {
+  background-color: #001529;
+  text-align: center;
+  margin: 20px 10px 0px 10px;
+  border-radius: 6px 6px 0px 0px;
+  padding: 12px 0px 6px 0px;
 }
 </style>

@@ -2,7 +2,7 @@
   <div>
     <database-search-filter @loadData="loadData"/>
 
-    <div class="database-main">
+    <div class="page-main">
       <a-alert message="등록된 드론 정보" type="info" show-icon
                style="margin-bottom: 10px"
       />
@@ -69,9 +69,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.database-main{
-  margin-top: 20px;
-  padding: 20px 20px 5px 20px;
-  background-color: white;
-}
+
 </style>

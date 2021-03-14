@@ -9,7 +9,7 @@
     @change="changePage"
   >
     <div slot="droneCategory" slot-scope="data">
-      {{ data}}
+      {{ droneCategory(data) }}
     </div>
   </a-table>
 </template>
@@ -29,11 +29,12 @@ export default {
   data() {
     return {
       columns: databaseColumn,
+      tableData: null,
     };
   },
   computed: {
     ...mapGetters('Database/list', {
-      tableData: 'getListData',
+      getListData: 'getListData',
       getListParams: 'getListParams',
     }),
     droneCategory() {
@@ -49,6 +50,14 @@ export default {
           return null;
         }
       };
+    },
+  },
+  watch: {
+    getListData: {
+      deep: true,
+      handler(val) {
+        if (val) this.tableData = val;
+      },
     },
   },
   methods: {

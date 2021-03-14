@@ -22,48 +22,57 @@
         검색
       </a-button>
     </template>
-    <a-form v-show="searchOpenFlag"
-            id="form"
-            @submit.prevent="searchData">
-      <a-descriptions :column="{xs: 1, sm: 1, md: 1, lg: 2, xl: 2, xxl: 2 }">
-        <a-descriptions-item label="드론 이름">
-          <a-input
-            v-model="searchParams.droneName"
-            class="search-input"
-          />
-        </a-descriptions-item>
-        <a-descriptions-item label="드론제조사">
-          <a-input
-            v-model="searchParams.droneMaker"
-            class="search-input"
-          />
-        </a-descriptions-item>
-        <a-descriptions-item label="드론 종류">
-          <a-select
-            v-model="searchParams.droneCategory"
-            class="search-input"
-          >
-            <a-select-option
-              v-for="(opt, index) in categoryOptions"
-              :key="index"
-              :value="opt.value"
+
+    <transition name="default-page" mode="out-in">
+      <a-form v-if="searchOpenFlag"
+              id="form"
+              @submit.prevent="searchData"
+      >
+        <a-descriptions :column="{xs: 1, sm: 1, md: 1, lg: 2, xl: 2, xxl: 2 }">
+          <a-descriptions-item label="드론 이름">
+            <a-input
+              v-model="searchParams.droneName"
+              class="search-input"
+            />
+          </a-descriptions-item>
+          <a-descriptions-item label="드론제조사">
+            <a-input
+              v-model="searchParams.droneMaker"
+              class="search-input"
+            />
+          </a-descriptions-item>
+          <a-descriptions-item label="드론 종류">
+            <a-select
+              v-model="searchParams.droneCategory"
+              class="search-input"
             >
-              {{ opt.label }}
-            </a-select-option>
-          </a-select>
-        </a-descriptions-item>
-        <a-descriptions-item label="시리얼넘버">
-          <a-input
-            v-model="searchParams.droneSerial"
-            class="search-input"
-          />
-        </a-descriptions-item>
-      </a-descriptions>
-    </a-form>
-    <div v-show="!searchOpenFlag"
-         style="text-align: center">
-      <a-icon type="dash" style="font-size: 30px" />
-    </div>
+              <a-select-option
+                v-for="(opt, index) in categoryOptions"
+                :key="index"
+                :value="opt.value"
+              >
+                {{ opt.label }}
+              </a-select-option>
+            </a-select>
+          </a-descriptions-item>
+          <a-descriptions-item label="시리얼넘버">
+            <a-input
+              v-model="searchParams.droneSerial"
+              class="search-input"
+            />
+          </a-descriptions-item>
+        </a-descriptions>
+      </a-form>
+
+      <div v-else
+           style="text-align: center"
+      >
+        <a-icon type="dash"
+                style="font-size: 30px"
+                @click="searchOpenFlag = !searchOpenFlag"
+        />
+      </div>
+    </transition>
 
   </a-page-header>
 </template>
@@ -73,9 +82,7 @@ import { droneCategory } from '@/utils/CommonData/selectOptions';
 
 export default {
   name: 'DatabaseSearchFilter',
-  components: {
-
-  },
+  components: {},
   data() {
     return {
       searchOpenFlag: false,
@@ -83,9 +90,7 @@ export default {
       searchParams: {},
     };
   },
-  computed: {
-
-  },
+  computed: {},
   created() {
     this.searchParams = { ...this.$store.getters['Database/list/getListParams'] };
   },
