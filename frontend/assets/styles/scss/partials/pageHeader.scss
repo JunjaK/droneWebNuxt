@@ -1,0 +1,11 @@
+@import '~assets/styles/mixins.scss';
+
+
+.page-header {
+  background-color: white;
+  border: $gray-3 1px solid;
+}
+.search-input {
+  width: 50%;
+  min-width: 200px;
+}
