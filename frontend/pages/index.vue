@@ -1,16 +1,20 @@
 <template>
-  <div class="page-main-without-header">
-    <logo/>
-    <div class="test-class"></div>
+  <div >
+    <main-header/>
+    <div class="page-main">
+      <logo/>
+      MapTest
+    </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import Logo from '@/components/logo';
+import MainHeader from '../components/Main/header';
+import Logo from '../components/logo';
 
 export default {
-  components: { Logo },
+  components: { Logo, MainHeader },
   head() {
     return {
       title: 'DroneWeb',

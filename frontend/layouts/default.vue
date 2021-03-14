@@ -39,7 +39,7 @@
             </a-menu-item>
           </a-menu>
           <div class="nav-etc">
-            <a-button type="primary" icon="user" />
+            <a-button type="dash" icon="setting" />
           </div>
         </a-row>
       </a-layout-header>
@@ -125,7 +125,7 @@ export default {
 .footer-style {
   background-color: #001529;
   text-align: center;
-  margin: 20px 10px 0px 10px;
+  margin: 20px 15px 0px 15px;
   border-radius: 6px 6px 0px 0px;
   padding: 12px 0px 6px 0px;
 }

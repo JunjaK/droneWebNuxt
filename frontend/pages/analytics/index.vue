@@ -1,12 +1,18 @@
 <template>
   <div>
-    this is analytics page
+    <analytics-header/>
+    <div class="page-main">
+      Content
+    </div>
   </div>
 </template>
 
 <script>
+import AnalyticsHeader from '../../components/Analytics/header';
+
 export default {
   components: {
+    AnalyticsHeader,
 
   },
   data() {
