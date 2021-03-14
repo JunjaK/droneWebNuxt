@@ -32,12 +32,16 @@ module.exports = {
     indent: [2, 2],
   },
   settings: {
+    'import/extensions': ['.js', '.jsx', '.vue'],
     'import/resolver': {
       alias: {
         map: [
           ['@', '.'],
         ],
-        extensions: ['.js', '.vue'],
+        extensions: ['.js', '.vue', '.jsx'],
+      },
+      node: {
+        extensions: ['.js', '.vue', '.jsx'],
       },
     },
   },

@@ -1,3 +1,5 @@
+import { resolve } from 'path';
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -14,6 +16,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],
   },
+  // Theme Animation
   loading: {
     color: '#1890ff',
     height: '5px',
@@ -38,8 +41,14 @@ export default {
     '@/plugins/antd-ui',
   ],
 
+  alias: {
+    '@': resolve(__dirname),
+    images: resolve(__dirname, './assets/images'),
+    styles: resolve(__dirname, './assets/styles'),
+  },
+
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: false,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -75,17 +84,19 @@ export default {
         },
       },
     },
+    devtool: true,
+    // analyze: true,
   },
 
   router: {
     middleware: 'stats',
-    extendRoutes(routes, resolve) {
-      routes.push({
-        name: '404Page',
-        path: '*',
-        redirect: '/auth/404',
-        component: resolve(__dirname, 'pages/auth/404.vue'),
-      });
-    },
+    // extendRoutes(routes, resolve) {
+    //   routes.push({
+    //     name: '404Page',
+    //     path: '*',
+    //     redirect: '/auth/404',
+    //     component: resolve(__dirname, 'pages/auth/404.vue'),
+    //   });
+    // },
   },
 };
