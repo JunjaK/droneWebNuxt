@@ -1,11 +1,11 @@
 /* eslint-disable func-names */
 export default function ({ $axios, redirect }) {
   $axios.onRequest((config) => {
-    console.log('axios config request hook', config);
+    console.log('axios config request hook');
     return config;
   });
   $axios.onResponse((response) => {
-    console.log('axios config response hook', response);
+    console.log('axios config response hook');
     return response;
   });
   $axios.onError((error) => {

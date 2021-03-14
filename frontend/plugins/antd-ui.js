@@ -1,16 +1,18 @@
 import Vue from 'vue';
 
 import {
-  Breadcrumb, Icon,
+  Breadcrumb, Icon, PageHeader, Alert, Result,
   Button, Layout, Table, Radio, Dropdown, Menu,
   Input, Calendar, Form, Tooltip, Select, Switch,
   Spin, Checkbox, Tabs, Pagination, notification,
   DatePicker, TimePicker, Divider, Card, Avatar,
-  Row, Col, Modal, ConfigProvider, Upload, Descriptions, Badge,
+  Row, Col, Modal, ConfigProvider, Descriptions, Badge,
 } from 'ant-design-vue';
 
 Vue.use(Badge);
-Vue.use(Upload);
+Vue.use(PageHeader);
+Vue.use(Result);
+Vue.use(Alert);
 Vue.use(Modal);
 Vue.use(Icon);
 Vue.use(Divider);
