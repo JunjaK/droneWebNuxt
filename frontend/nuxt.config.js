@@ -1,4 +1,5 @@
 import { resolve } from 'path';
+import { version } from './package.json';
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -19,7 +20,7 @@ export default {
   // Theme Animation
   loading: {
     color: '#1890ff',
-    height: '5px',
+    height: '4px',
   },
   layoutTransition: {
     name: 'default-layout',
@@ -42,10 +43,11 @@ export default {
   ],
 
   alias: {
-    '@': resolve(__dirname),
-    images: resolve(__dirname, './assets/images'),
-    styles: resolve(__dirname, './assets/styles'),
+    '@': resolve(__dirname, './src/'),
+    images: resolve(__dirname, './src/assets/images'),
+    styles: resolve(__dirname, './src/assets/styles'),
   },
+  srcDir: 'src/',
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: false,
@@ -60,23 +62,60 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
+    '@nuxtjs/auth-next',
   ],
+
+  /* env Setting */
+  env: {
+    baseUrl: process.env.BASE_API_URL,
+    baseAppUrl: process.env.BASE_APP_URL,
+    i18nLocale: process.env.BASE_I18N_LOCALE,
+    i18nFallBackLocale: process.env.BASE_I18N_FALLBACK_LOCALE,
+  },
+  // public nuxt.context config variables
+  publicRuntimeConfig: {
+    baseUrl: process.env.BASE_API_URL,
+    baseAppUrl: process.env.BASE_APP_URL,
+    i18nLocale: process.env.BASE_I18N_LOCALE,
+    i18nFallBackLocale: process.env.BASE_I18N_FALLBACK_LOCALE,
+  },
+  // private nuxt.context config variables
+  privateRuntimeConfig: {
+
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
     retry: { retries: 3 },
-    baseUrl: 'http://localhost:5555',
+    // baseUrl: 'http://localhost:5555',
+    headers: {
+      common: {
+        Accept: 'application/json, text/plain, */*',
+        AppVersion: version,
+      },
+      delete: {},
+      get: {},
+      head: {},
+      post: {},
+      put: {},
+      patch: {},
+    },
   },
   proxy: {
-    '/api/': {
-      target: 'http://localhost:5555',
+    '/api': {
+      target: process.env.BASE_API_URL || 'http://localhost:5555',
+      pathRewrite: {
+        '^/api': '',
+      },
+      changeOrigin: true,
     },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     loaders: {
+      // for Antdv CustomTheme Setting
       less: {
         lessOptions: {
           javascriptEnabled: true,
@@ -89,7 +128,7 @@ export default {
   },
 
   router: {
-    middleware: 'stats',
+    middleware: 'router',
     // extendRoutes(routes, resolve) {
     //   routes.push({
     //     name: '404Page',
@@ -98,5 +137,8 @@ export default {
     //     component: resolve(__dirname, 'pages/auth/404.vue'),
     //   });
     // },
+  },
+  auth: {
+    // Options
   },
 };
