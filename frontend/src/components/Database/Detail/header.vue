@@ -20,7 +20,7 @@
           {{ info.droneMaker }}
         </a-descriptions-item>
         <a-descriptions-item label="드론 종류">
-          {{ droneCategory(info.droneMaker) }}
+          {{ droneCategory(info.droneCategory) }}
 
         </a-descriptions-item>
         <a-descriptions-item label="시리얼넘버">
@@ -44,7 +44,7 @@ export default {
   computed: {
     droneCategory() {
       return (data) => {
-        switch (data) {
+        switch (parseInt(data, 10)) {
         case 1:
           return '촬영용';
         case 2:

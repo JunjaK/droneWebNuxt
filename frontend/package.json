@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
+    "build": "nuxt build --modern=server",
+    "start": "nuxt start --modern=server",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint": "yarn lint:js",
-    "serve": "json-server --watch src/lib/db.json --port 5555"
+    "serve": "json-server --watch lib/db.json --port 5555"
   },
   "dependencies": {
     "@nuxtjs/auth-next": "5.0.0-1613647907.37b1156",
