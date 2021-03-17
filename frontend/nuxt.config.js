@@ -1,3 +1,12 @@
+/* eslint-disable no-unused-vars */
+import api from './nuxtConfig/api';
+import build from './nuxtConfig/build';
+import theme from './nuxtConfig/theme';
+import nuxtConfigModule from './nuxtConfig/module';
+import extendRouter from './nuxtConfig/extendRouter';
+
+// 경로가 포함된 세팅은 import-export 모듈 구조로 파일 구성 시 경로 설정이 애매하므로, 별도 파일로 관리하지 않음
+// 설정 내용이 짧은 것도 별도 파일로 관리하지 않음.
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -15,66 +24,25 @@ export default {
     ],
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    '~/assets/styles/less/index',
-  ],
-  styleResources: {
-    scss: [
-      '@/assets/styles/scss/index',
-    ],
-  },
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '@/plugins/antd-ui',
-  ],
-
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: false,
+  // source Directory
+  srcDir: 'src/',
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/eslint
-  ],
-
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
-    '@nuxtjs/style-resources',
-  ],
-
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    proxy: true,
-    retry: { retries: 3 },
-    baseUrl: '',
-  },
-  proxy: {
-    '/api/': '',
-    '/api2/': '',
-  },
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    loaders: {
-      less: {
-        lessOptions: {
-          javascriptEnabled: true,
-          math: 'always',
-        },
-      },
-    },
-  },
-
+  /* middleware */
   router: {
-    extendRoutes(routes, resolve) {
-      routes.push({
-        name: '404Page',
-        path: '*',
-        redirect: '/auth/404',
-        component: resolve(__dirname, 'pages/auth/404.vue'),
-      });
-    },
+    // router middleware
+    middleware: 'router',
+    // router extend
+    // extendRoutes: extendRouter,
   },
+
+  // axios, proxy, auth
+  ...api,
+  // module, plugin, alias
+  ...nuxtConfigModule,
+  // env, runtimeConfig, build
+  ...build,
+  // loading, transition, css
+  ...theme,
 };
