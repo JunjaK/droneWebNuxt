@@ -18,6 +18,7 @@
               :icon-url="require('@/../static/img/drone.jpeg')"
             ></l-icon>
           </l-marker>
+          <l-polyline :lat-lngs="polyline.latlngs" :color="polyline.color"></l-polyline>
         </l-map>
         <button @click="moveDrone">
           드론 위쪽 이동
@@ -51,6 +52,10 @@ export default {
       key: 123,
       droneLon: 37.2430125,
       droneLat: 127.0811054,
+      polyline: {
+        latlngs: [[37.249298, 127.078012], [37.248658, 127.078055], [37.248658, 127.079181], [37.247744, 127.079342]],
+        color: 'green',
+      },
     };
   },
   computed: {
