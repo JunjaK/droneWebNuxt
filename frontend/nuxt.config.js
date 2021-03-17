@@ -5,8 +5,7 @@ import theme from './nuxtConfig/theme';
 import nuxtConfigModule from './nuxtConfig/module';
 import extendRouter from './nuxtConfig/extendRouter';
 
-// 경로가 포함된 세팅은 import-export 모듈 구조로 파일 구성 시 경로 설정이 애매하므로, 별도 파일로 관리하지 않음
-// 설정 내용이 짧은 것도 별도 파일로 관리하지 않음.
+// 설정 내용이 짧은 것 및 구조화 하기 애매한 것은 별도 파일로 관리하지 않음.
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -37,12 +36,21 @@ export default {
     // extendRoutes: extendRouter,
   },
 
-  // axios, proxy, auth
-  ...api,
   // module, plugin, alias
   ...nuxtConfigModule,
+  // axios, proxy, auth
+  ...api,
   // env, runtimeConfig, build
   ...build,
   // loading, transition, css
   ...theme,
+
+  vue: {
+    config: {
+      productionTip: true,
+      devtools: process.env.NODE_ENV === 'development',
+      // silent: process.env.NODE_ENV !== 'development',
+      // performance: process.env.NODE_ENV === 'development',
+    },
+  },
 };

@@ -18,11 +18,17 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
     '@nuxtjs/auth-next',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
   ],
   // alias
   alias: {
     '@': resolve(__dirname, '../src/'),
     images: resolve(__dirname, '../src/assets/images'),
     styles: resolve(__dirname, '../src/assets/styles'),
+  },
+  robots: {
+    UserAgent: '*',
+    Disallow: '/',
   },
 };
