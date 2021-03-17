@@ -41,6 +41,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
     '@nuxtjs/auth-next',
+    'nuxt-leaflet',
   ],
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: false,

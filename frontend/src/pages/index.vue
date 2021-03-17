@@ -1,9 +1,10 @@
 <template>
-  <div >
+  <div>
     <main-header/>
     <div class="page-main">
       <logo/>
       MapTest
+    </div>
   <div>
     <div id="map-wrap" style="height: 90vh">
       <client-only>
@@ -13,6 +14,7 @@
         </l-map>
       </client-only>
     </div>
+  </div>
   </div>
 </template>
 
