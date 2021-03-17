@@ -1,3 +1,10 @@
+import { resolve } from 'path';
+import api from './nuxtConfig/api';
+import build from './nuxtConfig/build';
+import theme from './nuxtConfig/theme';
+
+// 경로가 포함된 세팅은 import-export 모듈 구조로 파일 구성 시 경로 설정이 애매하므로, 별도 파일로 관리하지 않음
+// 설정 내용이 짧은 것도 별도 파일로 관리하지 않음.
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -14,19 +21,6 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],
   },
-  loading: {
-    color: '#1890ff',
-    height: '5px',
-  },
-  layoutTransition: {
-    name: 'default-layout',
-    mode: 'out-in',
-  },
-  pageTransition: {
-    name: 'default-page',
-    mode: 'out-in',
-  },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '~/assets/styles/less/index',
@@ -37,56 +31,45 @@ export default {
     '@/plugins/ApiClient/index',
     '@/plugins/antd-ui',
   ],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
-
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
   ],
-
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
-    'nuxt-leaflet',
+    '@nuxtjs/auth-next',
   ],
-
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    proxy: true,
-    retry: { retries: 3 },
-    baseUrl: 'http://localhost:5555',
+  // Auto import components: https://go.nuxtjs.dev/config-components
+  components: false,
+  // alias
+  alias: {
+    '@': resolve(__dirname, './src/'),
+    images: resolve(__dirname, './src/assets/images'),
+    styles: resolve(__dirname, './src/assets/styles'),
   },
-  proxy: {
-    '/api/': {
-      target: 'http://localhost:5555',
-    },
-  },
+  // source Directory
+  srcDir: 'src/',
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    loaders: {
-      less: {
-        lessOptions: {
-          javascriptEnabled: true,
-          math: 'always',
-        },
-      },
-    },
-  },
-
+  // router option or extend
   router: {
-    middleware: 'stats',
-    extendRoutes(routes, resolve) {
-      routes.push({
-        name: '404Page',
-        path: '*',
-        redirect: '/auth/404',
-        component: resolve(__dirname, 'pages/auth/404.vue'),
-      });
-    },
+    middleware: 'router',
+    // extendRoutes(routes, resolve) {
+    //   routes.push({
+    //     name: '404Page',
+    //     path: '*',
+    //     redirect: '/auth/404',
+    //     component: resolve(__dirname, 'pages/auth/404.vue'),
+    //   });
+    // },
   },
+
+  // axios, proxy, auth
+  ...api,
+  // env, runtimeConfig, build
+  ...build,
+  // loading, transition
+  ...theme,
 };
