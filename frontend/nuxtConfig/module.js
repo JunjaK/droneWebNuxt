@@ -20,15 +20,12 @@ export default {
     '@nuxtjs/auth-next',
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
+    'nuxt-socket-io',
   ],
   // alias
   alias: {
     '@': resolve(__dirname, '../src/'),
     images: resolve(__dirname, '../src/assets/images'),
     styles: resolve(__dirname, '../src/assets/styles'),
-  },
-  robots: {
-    UserAgent: '*',
-    Disallow: '/',
   },
 };

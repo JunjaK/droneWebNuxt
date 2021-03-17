@@ -3,6 +3,7 @@ import api from './nuxtConfig/api';
 import build from './nuxtConfig/build';
 import theme from './nuxtConfig/theme';
 import nuxtConfigModule from './nuxtConfig/module';
+import io from './nuxtConfig/ioConfig';
 import extendRouter from './nuxtConfig/extendRouter';
 
 // 설정 내용이 짧은 것 및 구조화 하기 애매한 것은 별도 파일로 관리하지 않음.
@@ -36,7 +37,7 @@ export default {
     // extendRoutes: extendRouter,
   },
 
-  // module, plugin, alias
+  // module, plugin, alias, robots
   ...nuxtConfigModule,
   // axios, proxy, auth
   ...api,
@@ -45,6 +46,7 @@ export default {
   // loading, transition, css
   ...theme,
 
+  // vue App setting
   vue: {
     config: {
       productionTip: true,
@@ -53,4 +55,11 @@ export default {
       // performance: process.env.NODE_ENV === 'development',
     },
   },
+  // robots Setting
+  robots: {
+    UserAgent: '*',
+    Disallow: '/',
+  },
+  // socket io Setting
+  io,
 };
