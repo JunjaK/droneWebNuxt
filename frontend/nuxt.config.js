@@ -46,7 +46,7 @@ export default {
   // loading, transition, css
   ...theme,
 
-  // vue App setting
+  // vue Global Config
   vue: {
     config: {
       productionTip: true,
