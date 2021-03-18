@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div>
     <database-detail-header/>
 

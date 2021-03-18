@@ -7,15 +7,14 @@
           <l-map class="map" :zoom=18 :center="[currentLatitude ? currentLatitude : 0, currentLongitude ? currentLongitude : 0]">
             <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
             <l-marker :lat-lng="[37.2429025,127.0800954]"></l-marker>
-
-            <l-marker :lat-lng="[drone.latitude,drone.longitude]">
-              <l-icon
-                :icon-size="[50, 50]"
-                :icon-anchor="[25, 25]"
-                :icon-url="require('@/../static/img/drone.jpeg')"
-              ></l-icon>
-            </l-marker>
-            <l-polyline :lat-lngs="drone.polyline.latlngs" :color="drone.polyline.color"></l-polyline>
+            <drone
+              :latitude="currentLatitude ? currentLatitude + 0.1 : 37.2429025"
+              :longitude="currentLongitude ? currentLongitude + 0.1 : 127.0800954"
+            />
+            <drone
+              :latitude="currentLatitude ? currentLatitude + 0.1 : 38.2429025"
+              :longitude="currentLongitude ? currentLongitude + 0.1 : 128.0800954"
+            />
           </l-map>
         </client-only>
       </div>
@@ -26,9 +25,10 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import MainHeader from '@/components/Main/header';
+import Drone from '@/components/Main/drone';
 
 export default {
-  components: { MainHeader },
+  components: { MainHeader, Drone },
   head() {
     return {
       title: 'DroneWeb',
@@ -51,8 +51,6 @@ export default {
           color: 'green',
         },
       },
-      droneLon: 37.2430125,
-      droneLat: 127.0811054,
       currentLatitude: 0,
       currentLongitude: 0,
     };

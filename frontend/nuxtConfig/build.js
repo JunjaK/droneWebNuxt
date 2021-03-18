@@ -5,7 +5,7 @@
  */
 export default {
   // modern property https://ko.nuxtjs.org/docs/2.x/configuration-glossary/configuration-modern
-  modern: true,
+  modern: false,
   /* env Setting */
   env: {
     baseUrl: process.env.BASE_API_URL,
