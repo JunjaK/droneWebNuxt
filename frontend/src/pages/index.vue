@@ -8,18 +8,15 @@
             <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
             <l-marker :lat-lng="[37.2429025,127.0800954]"></l-marker>
 
-            <l-marker :lat-lng="[droneLon,droneLat]">
+            <l-marker :lat-lng="[drone.latitude,drone.longitude]">
               <l-icon
                 :icon-size="[50, 50]"
-                :icon-anchor="[10, 10]"
+                :icon-anchor="[25, 25]"
                 :icon-url="require('@/../static/img/drone.jpeg')"
               ></l-icon>
             </l-marker>
-            <l-polyline :lat-lngs="polyline.latlngs" :color="polyline.color"></l-polyline>
+            <l-polyline :lat-lngs="drone.polyline.latlngs" :color="drone.polyline.color"></l-polyline>
           </l-map>
-          <button @click="moveDrone">
-            드론 위쪽 이동
-          </button>
         </client-only>
       </div>
     </div>
@@ -46,13 +43,16 @@ export default {
   },
   data() {
     return {
-      key: 123,
+      drone: {
+        latitude: 37.2430125,
+        longitude: 127.0811054,
+        polyline: {
+          latlngs: [],
+          color: 'green',
+        },
+      },
       droneLon: 37.2430125,
       droneLat: 127.0811054,
-      polyline: {
-        latlngs: [[37.249298, 127.078012], [37.248658, 127.078055], [37.248658, 127.079181], [37.247744, 127.079342]],
-        color: 'green',
-      },
       currentLatitude: 0,
       currentLongitude: 0,
     };
@@ -70,6 +70,7 @@ export default {
       }, () => {
       }, { enableHighAccuracy: true, maximumAge: 0 });
     }
+    this.makeDronePath();
   },
   fetch() {
     this.setSettings({ test: '123' });
@@ -81,8 +82,13 @@ export default {
     ...mapActions({
       setSettings: 'setSettings',
     }),
-    moveDrone() {
-      this.droneLon += 0.00001;
+    makeDronePath() {
+      setTimeout(() => {
+        this.drone.latitude += 0.00005;
+        this.drone.longitude += 0.00005;
+        this.drone.polyline.latlngs.push([this.drone.latitude, this.drone.longitude]);
+        this.makeDronePath();
+      }, 500);
     },
   },
 };
