@@ -3,6 +3,7 @@
     <database-search-filter @loadData="loadData"/>
 
     <div class="page-main">
+      {{ a }}
       <a-alert message="등록된 드론 정보" type="info" show-icon
                style="margin-bottom: 10px"
       />
@@ -18,6 +19,16 @@
 import { mapActions } from 'vuex';
 import DatabaseSearchFilter from '@/components/Database/searchFilter';
 import DatabaseTable from '@/components/Database/table';
+
+function timeoutFunc() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log('timeOut async');
+      const test = 'test1234';
+      resolve(test);
+    }, 5000);
+  });
+}
 
 export default {
   head() {
@@ -41,11 +52,11 @@ export default {
       pagination: {},
     };
   },
-  computed: {
-
-  },
-  watch: {
-
+  computed: {},
+  watch: {},
+  async asyncData() {
+    const a = await timeoutFunc();
+    return { a };
   },
   created() {
     this.loadData();

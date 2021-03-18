@@ -1,10 +1,12 @@
-import { resolve } from 'path';
+/* eslint-disable no-unused-vars */
 import api from './nuxtConfig/api';
 import build from './nuxtConfig/build';
 import theme from './nuxtConfig/theme';
+import nuxtConfigModule from './nuxtConfig/module';
+import io from './nuxtConfig/ioConfig';
+import extendRouter from './nuxtConfig/extendRouter';
 
-// 경로가 포함된 세팅은 import-export 모듈 구조로 파일 구성 시 경로 설정이 애매하므로, 별도 파일로 관리하지 않음
-// 설정 내용이 짧은 것도 별도 파일로 관리하지 않음.
+// 설정 내용이 짧은 것 및 구조화 하기 애매한 것은 별도 파일로 관리하지 않음.
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -21,56 +23,43 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],
   },
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    '~/assets/styles/less/index',
-    '~/assets/styles/scss/index',
-  ],
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '@/plugins/ApiClient/index',
-    '@/plugins/antd-ui',
-  ],
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/eslint
-  ],
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
-    '@nuxtjs/style-resources',
-    '@nuxtjs/auth-next',
-    'nuxt-leaflet',
-  ],
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: false,
-  // alias
-  alias: {
-    '@': resolve(__dirname, './src/'),
-    images: resolve(__dirname, './src/assets/images'),
-    styles: resolve(__dirname, './src/assets/styles'),
-  },
   // source Directory
   srcDir: 'src/',
 
-  // router option or extend
+  /* middleware */
   router: {
+    // router middleware
     middleware: 'router',
-    // extendRoutes(routes, resolve) {
-    //   routes.push({
-    //     name: '404Page',
-    //     path: '*',
-    //     redirect: '/auth/404',
-    //     component: resolve(__dirname, 'pages/auth/404.vue'),
-    //   });
-    // },
+    // router extend
+    // extendRoutes: extendRouter,
   },
 
+  // module, plugin, alias, robots
+  ...nuxtConfigModule,
   // axios, proxy, auth
   ...api,
   // env, runtimeConfig, build
   ...build,
-  // loading, transition
+  // loading, transition, css
   ...theme,
+
+  // vue Global Config
+  vue: {
+    config: {
+      productionTip: true,
+      devtools: process.env.NODE_ENV === 'development',
+      // silent: process.env.NODE_ENV !== 'development',
+      // performance: process.env.NODE_ENV === 'development',
+    },
+  },
+  // robots Setting
+  robots: {
+    UserAgent: '*',
+    Disallow: '/',
+  },
+  // socket io Setting
+  io,
 };

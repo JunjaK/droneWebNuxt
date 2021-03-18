@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
+    "analyze-dev": "nuxt --analyze",
     "build": "nuxt build --modern=server",
+    "analyze-build": "nuxt build --analyze",
     "start": "nuxt start --modern=server",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
@@ -14,10 +16,12 @@
   "dependencies": {
     "@nuxtjs/auth-next": "5.0.0-1613647907.37b1156",
     "@nuxtjs/axios": "^5.13.1",
+    "@nuxtjs/robots": "^2.5.0",
+    "@nuxtjs/sitemap": "^2.4.0",
     "ant-design-vue": "^1.7.2",
     "core-js": "^3.8.3",
     "nuxt": "^2.14.12",
-    "nuxt-leaflet": "^0.0.25",
+    "nuxt-socket-io": "^1.1.14",
     "store2": "^2.12.0",
     "vuex": "^3.6.2"
   },
