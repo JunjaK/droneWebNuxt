@@ -30,6 +30,9 @@ export default {
   srcDir: 'src/',
 
   /* middleware */
+  serverMiddleware: [
+    './serverMiddleWare/index',
+  ],
   router: {
     // router middleware
     middleware: 'router',
@@ -55,6 +58,7 @@ export default {
       // performance: process.env.NODE_ENV === 'development',
     },
   },
+
   // robots Setting
   robots: {
     UserAgent: '*',

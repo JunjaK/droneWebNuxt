@@ -20,9 +20,11 @@
     "@nuxtjs/sitemap": "^2.4.0",
     "ant-design-vue": "^1.7.2",
     "core-js": "^3.8.3",
+    "express": "^4.17.1",
     "nuxt": "^2.14.12",
     "nuxt-leaflet": "^0.0.25",
     "nuxt-socket-io": "^1.1.14",
+    "socket.io": "^4.0.0",
     "store2": "^2.12.0",
     "vuex": "^3.6.2"
   },

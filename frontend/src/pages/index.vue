@@ -8,12 +8,16 @@
             <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
             <l-marker :lat-lng="[37.2429025,127.0800954]"></l-marker>
             <drone
-              :latitude="currentLatitude ? currentLatitude + 0.1 : 37.2429025"
-              :longitude="currentLongitude ? currentLongitude + 0.1 : 127.0800954"
+              :latitude="currentLatitude ? currentLatitude + 5 : 37.2429025"
+              :longitude="currentLongitude ? currentLongitude + 5 : 127.0800954"
             />
             <drone
-              :latitude="currentLatitude ? currentLatitude + 0.1 : 38.2429025"
-              :longitude="currentLongitude ? currentLongitude + 0.1 : 128.0800954"
+              :latitude="currentLatitude ? currentLatitude + 10 : 37.2429025"
+              :longitude="currentLongitude ? currentLongitude + 10 : 127.0800954"
+            />
+            <drone
+              :latitude="currentLatitude"
+              :longitude="currentLongitude"
             />
           </l-map>
         </client-only>
@@ -51,8 +55,9 @@ export default {
           color: 'green',
         },
       },
-      currentLatitude: 0,
-      currentLongitude: 0,
+      currentLatitude: 37.2430125,
+      currentLongitude: 127.0811054,
+      socket: null,
     };
   },
   computed: {
@@ -68,25 +73,39 @@ export default {
       }, () => {
       }, { enableHighAccuracy: true, maximumAge: 0 });
     }
-    this.makeDronePath();
   },
   fetch() {
     this.setSettings({ test: '123' });
   },
   mounted() {
     this.setSettings({ test: '456' });
+
+    this.socket = this.$nuxtSocket({
+      channel: '/socket',
+    });
+
+    this.socket.on('connection', (msg, cb) => {
+      console.log('connection', msg);
+      this.socket.emit('response', {
+        hello: 'world',
+      }, (resp) => {
+        console.log('123');
+      });
+    });
   },
   methods: {
     ...mapActions({
       setSettings: 'setSettings',
     }),
-    makeDronePath() {
-      setTimeout(() => {
-        this.drone.latitude += 0.00005;
-        this.drone.longitude += 0.00005;
-        this.drone.polyline.latlngs.push([this.drone.latitude, this.drone.longitude]);
-        this.makeDronePath();
-      }, 500);
+    method1() {
+      this.socket.on('connect', () => {
+        console.log('서버와 연결');
+      });
+      this.socket.emit('connect', {
+        hello: 'world',
+      }, (resp) => {
+        console.log('123');
+      });
     },
   },
 };
