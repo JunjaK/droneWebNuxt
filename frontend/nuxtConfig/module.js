@@ -21,6 +21,7 @@ export default {
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
     'nuxt-socket-io',
+    'nuxt-leaflet',
   ],
   // alias
   alias: {
