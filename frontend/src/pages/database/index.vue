@@ -54,10 +54,6 @@ export default {
   },
   computed: {},
   watch: {},
-  async asyncData() {
-    const a = await timeoutFunc();
-    return { a };
-  },
   created() {
     this.loadData();
   },
